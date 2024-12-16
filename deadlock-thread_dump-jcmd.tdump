@@ -1,0 +1,103 @@
+Usage : jcmd <vmid> <arguments>
+
+   -J : supply arguments to the Java VM running jcmd
+   -l : list JVM processes on the local machine
+   -h : print this help message
+
+   <vmid> : Attach API VM ID as shown in jps or other Attach API-based tools
+
+   arguments:
+      help : print the list of diagnostic commands
+      help <command> : print help for the specific command
+      <command> [command arguments] : command from the list returned by "help"
+
+list JVM processes on the local machine. Default behavior when no options are specified.
+
+NOTE: this utility might significantly affect the performance of the target JVM.
+    The available diagnostic commands are determined by
+    the target VM and may vary between VMs.
+JRE 11 Linux amd64-64-Bit Compressed References 20210421_975 (JIT enabled, AOT enabled)
+OpenJ9   - b4cc246d9
+OMR      - 162e6f729
+JCL      - 7796c80419 based on jdk-11.0.11+9
+
+"JIT Compilation Thread-000" prio=10 Id=3 RUNNABLE
+
+"JIT Compilation Thread-001 Suspended" prio=10 Id=4 RUNNABLE
+
+"JIT Compilation Thread-002 Suspended" prio=10 Id=5 RUNNABLE
+
+"JIT Compilation Thread-003 Suspended" prio=10 Id=6 RUNNABLE
+
+"JIT Compilation Thread-004 Suspended" prio=10 Id=7 RUNNABLE
+
+"JIT Compilation Thread-005 Suspended" prio=10 Id=8 RUNNABLE
+
+"JIT Compilation Thread-006 Suspended" prio=10 Id=9 RUNNABLE
+
+"JIT Diagnostic Compilation Thread-007 Suspended" prio=10 Id=10 RUNNABLE
+
+"JIT-SamplerThread" prio=10 Id=11 TIMED_WAITING
+
+"IProfiler" prio=5 Id=12 RUNNABLE
+
+"Common-Cleaner" prio=8 Id=2 TIMED_WAITING
+	at java.base@11.0.11/java.lang.Object.wait(Native Method)
+	at java.base@11.0.11/java.lang.Object.wait(Object.java:221)
+	at java.base@11.0.11/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:138)
+	at java.base@11.0.11/jdk.internal.ref.CleanerImpl.run(CleanerImpl.java:148)
+	at java.base@11.0.11/java.lang.Thread.run(Thread.java:836)
+	at java.base@11.0.11/jdk.internal.misc.InnocuousThread.run(InnocuousThread.java:134)
+
+"Concurrent Mark Helper" prio=1 Id=13 RUNNABLE
+
+"GC Worker" prio=5 Id=14 RUNNABLE
+
+"GC Worker" prio=5 Id=15 RUNNABLE
+
+"GC Worker" prio=5 Id=16 RUNNABLE
+
+"GC Worker" prio=5 Id=17 RUNNABLE
+
+"GC Worker" prio=5 Id=18 RUNNABLE
+
+"GC Worker" prio=5 Id=19 RUNNABLE
+
+"GC Worker" prio=5 Id=20 RUNNABLE
+
+"Attach API wait loop" prio=10 Id=23 TIMED_WAITING
+	at java.base@11.0.11/java.lang.Thread.sleep(Native Method)
+	at java.base@11.0.11/java.lang.Thread.sleep(Thread.java:966)
+	at java.base@11.0.11/openj9.internal.tools.attach.target.WaitLoop.checkReplyAndCreateAttachment(WaitLoop.java:140)
+	at java.base@11.0.11/openj9.internal.tools.attach.target.WaitLoop.waitForNotification(WaitLoop.java:117)
+	at java.base@11.0.11/openj9.internal.tools.attach.target.WaitLoop.run(WaitLoop.java:154)
+
+"Thread 1" prio=5 Id=24 BLOCKED on java.lang.Object@14193f9c owned by "Thread 2" Id=25
+	at app//com.epam.jmp.mat.deadlock.SimulateDeadLock.method1(SimulateDeadLock.java:23)
+	- locked java.lang.Object@8f64c4ba
+	at app//com.epam.jmp.mat.deadlock.DeadLockMain$1.run(DeadLockMain.java:11)
+
+"Thread 2" prio=5 Id=25 BLOCKED on java.lang.Object@8f64c4ba owned by "Thread 1" Id=24
+	at app//com.epam.jmp.mat.deadlock.SimulateDeadLock.method2(SimulateDeadLock.java:43)
+	- locked java.lang.Object@14193f9c
+	at app//com.epam.jmp.mat.deadlock.DeadLockMain$2.run(DeadLockMain.java:18)
+
+"DestroyJavaVM helper thread" prio=5 Id=26 RUNNABLE
+
+"file lock watchdog" prio=10 Id=28 TIMED_WAITING
+	at java.base@11.0.11/java.lang.Object.wait(Native Method)
+	at java.base@11.0.11/java.lang.Object.wait(Object.java:221)
+	at java.base@11.0.11/java.util.TimerThread.mainLoop(Timer.java:553)
+	at java.base@11.0.11/java.util.TimerThread.run(Timer.java:506)
+
+"Finalizer thread" prio=5 Id=29 RUNNABLE
+
+"Attachment 39233" prio=10 Id=32 RUNNABLE
+	at java.base@11.0.11/openj9.internal.tools.attach.target.DiagnosticUtils.dumpAllThreadsImpl(Native Method)
+	at java.base@11.0.11/openj9.internal.tools.attach.target.DiagnosticUtils.getThreadInfo(DiagnosticUtils.java:245)
+	at openj9.internal.tools.attach.target.DiagnosticUtils$$Lambda$10/0x000000008c023790.apply(Unknown Source)
+	at java.base@11.0.11/openj9.internal.tools.attach.target.DiagnosticUtils.executeDiagnosticCommand(DiagnosticUtils.java:181)
+	at java.base@11.0.11/openj9.internal.tools.attach.target.Attachment.doCommand(Attachment.java:249)
+	at java.base@11.0.11/openj9.internal.tools.attach.target.Attachment.run(Attachment.java:160)
+
+
